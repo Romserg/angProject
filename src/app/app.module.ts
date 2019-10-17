@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { CreateEmployeeComponent } from './employee/create-employee.component';
 import { ListEmployeesComponent } from './employee/list-employees.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { AppRoutingModule } from './app-routing.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
