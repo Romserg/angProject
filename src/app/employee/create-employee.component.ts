@@ -8,7 +8,9 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class CreateEmployeeComponent implements OnInit {
   employeeForm: FormGroup;
-  constructor() { }
+
+  constructor() {
+  }
 
   ngOnInit() {
     this.employeeForm = new FormGroup({
@@ -19,6 +21,18 @@ export class CreateEmployeeComponent implements OnInit {
         experienceInYears: new FormControl(),
         proficiency: new FormControl()
       })
+    });
+  }
+
+  onLoadDataClick(): void {
+    this.employeeForm.setValue({
+      fullName: 'Test name',
+      email: 'email@test.com',
+      skills: {
+        skillName: 'Web',
+        experienceInYears: '2',
+        proficiency: 'advanced'
+      }
     });
   }
 
