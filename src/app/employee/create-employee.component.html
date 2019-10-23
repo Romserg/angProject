@@ -4,10 +4,20 @@
       <h3 class="panel-title">Create Employee</h3>
     </div>
     <div class="panel-body">
-      <div class="form-group">
+      <div class="form-group" [ngClass]="{'has-error' : employeeForm.get('fullName').errors &&
+      (employeeForm.get('fullName').touched || employeeForm.get('fullName').dirty)}">
         <label for="fullName" class="col-sm-2 control-label">Full Name</label>
         <div class="col-sm-8">
           <input id="fullName" formControlName="fullName" type="text" class="form-control">
+          <span class="help-block" *ngIf="employeeForm.get('fullName').errors &&
+                (employeeForm.get('fullName').touched || employeeForm.get('fullName').dirty)">
+            <span *ngIf="employeeForm.get('fullName').errors.required">
+              Full Name is required
+            </span>
+            <span *ngIf="employeeForm.get('fullName').errors.minlength || employeeForm.get('fullName').errors.maxlength">
+              Full Name must be greater than 2 characters and less than 30 characters
+            </span>
+          </span>
         </div>
       </div>
 
@@ -61,3 +71,7 @@
     </div>
   </div>
 </form>
+
+<div>Touched {{employeeForm.touched}}</div>
+<div>Dirty {{employeeForm.dirty}}</div>
+<div>Valid {{employeeForm.valid}}</div>
