@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-create-employee',
@@ -51,7 +51,7 @@ export class CreateEmployeeComponent implements OnInit {
       })
     });
 
-    this.employeeForm.valueChanges.subscribe(data => {
+    this.employeeForm.valueChanges.subscribe(() => {
       this.logValidationErrors(this.employeeForm);
     });
     // this.employeeForm = new FormGroup({
@@ -76,7 +76,7 @@ export class CreateEmployeeComponent implements OnInit {
           (abstractControl.touched || abstractControl.dirty)) {
           const messages = this.validationMessages[key];
           for (const errorKey in abstractControl.errors) {
-            if (errorKey) {
+            if (abstractControl.errors.hasOwnProperty(errorKey)) {
               this.formErrors[key] += messages[errorKey] + ' ';
             }
           }
