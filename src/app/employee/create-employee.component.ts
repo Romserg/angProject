@@ -67,6 +67,7 @@ export class CreateEmployeeComponent implements OnInit {
       if (abstractControl instanceof FormGroup) {
         this.logValidationErrors(abstractControl);
       } else {
+        this.formErrors[key] = '';
         if (abstractControl && !abstractControl.valid) {
           const messages = this.validationMessages[key];
           for (const errorKey in abstractControl.errors) {
