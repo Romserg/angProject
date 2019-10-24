@@ -89,6 +89,23 @@
   </div>
 </form>
 
-<div>Touched {{employeeForm.touched}}</div>
-<div>Dirty {{employeeForm.dirty}}</div>
-<div>Valid {{employeeForm.valid}}</div>
+<table class="form-status">
+  <tr>
+    <th>FormGroup</th>
+    <th>FormControl (fullName)</th>
+  </tr>
+  <tr>
+    <td>
+      touched : {{ employeeForm.touched }}
+      <br/> dirty : {{ employeeForm.dirty }}
+      <br/> valid : {{ employeeForm.valid }}
+      <br/> Form Values : {{employeeForm.value | json}}
+    </td>
+    <td>
+      touched : {{ employeeForm.get('fullName').touched }}
+      <br/> dirty : {{ employeeForm.get('fullName').dirty }}
+      <br/> valid : {{ employeeForm.get('fullName').valid }}
+      <br/> FullName Value : {{employeeForm.get('fullName').value}}
+    </td>
+  </tr>
+</table>

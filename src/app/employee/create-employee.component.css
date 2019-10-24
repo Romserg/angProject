@@ -1,0 +1,11 @@
+.form-status {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.form-status,
+.form-status th,
+.form-status td {
+  padding: 10px;
+  border: 1px solid black;
+}
