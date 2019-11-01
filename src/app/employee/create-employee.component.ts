@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-create-employee',
@@ -49,7 +49,7 @@ export class CreateEmployeeComponent implements OnInit {
     this.employeeForm = this.fb.group({
       fullName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
       contactPreference: ['email'],
-      email: ['', [Validators.required, emailDomain]],
+      email: ['', [Validators.required, emailDomain('google.com')]],
       phone: [''],
       skills: this.fb.group({
         skillName: ['', Validators.required],
@@ -117,14 +117,16 @@ export class CreateEmployeeComponent implements OnInit {
 
 }
 
-function emailDomain(control: AbstractControl): ValidationErrors | null {
-  const email: string = control.value;
-  const domain = email.substring(email.lastIndexOf('@') + 1);
-  if (email === '' || domain.toLowerCase() === 'google.com') {
-    return null;
-  } else {
-    return {
-      emailDomain: true
-    };
-  }
+function emailDomain(domainName: string) {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const email: string = control.value;
+    const domain = email.substring(email.lastIndexOf('@') + 1);
+    if (email === '' || domain.toLowerCase() === domainName.toLowerCase()) {
+      return null;
+    } else {
+      return {
+        emailDomain: true
+      };
+    }
+  };
 }
