@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { CustomValidators } from '../shared/custom.validators';
 
 @Component({
@@ -63,11 +63,9 @@ export class CreateEmployeeComponent implements OnInit {
         confirmEmail: ['', Validators.required]
       }, {validator: matchEmail}),
       phone: [''],
-      skills: this.fb.group({
-        skillName: ['', Validators.required],
-        experienceInYears: ['', Validators.required],
-        proficiency: ['', Validators.required]
-      })
+      skills: this.fb.array([
+        this.addSkillFormGroup()
+      ])
     });
 
     this.employeeForm.get('contactPreference').valueChanges.subscribe((data: string) => {
@@ -88,14 +86,30 @@ export class CreateEmployeeComponent implements OnInit {
     // });
   }
 
+  addSkillFormGroup(): FormGroup {
+    return this.fb.group({
+      skillName: ['', Validators.required],
+      experienceInYears: ['', Validators.required],
+      proficiency: ['', Validators.required]
+    });
+  }
+
   onContactPreferenceChange(selectedValue: string) {
     const phoneControl = this.employeeForm.get('phone');
+    const emailControl = this.employeeForm.get('emailGroup.email');
+    const emailConfirmControl = this.employeeForm.get('emailGroup.confirmEmail');
     if (selectedValue === 'phone') {
       phoneControl.setValidators(Validators.required);
+      emailControl.clearValidators();
+      emailConfirmControl.clearValidators();
     } else {
       phoneControl.clearValidators();
+      emailControl.setValidators([Validators.required, CustomValidators.emailDomain('google.com')]);
+      emailConfirmControl.setValidators(Validators.required);
     }
     phoneControl.updateValueAndValidity();
+    emailControl.updateValueAndValidity();
+    emailConfirmControl.updateValueAndValidity();
   }
 
   logValidationErrors(group: FormGroup = this.employeeForm): void {
@@ -116,12 +130,34 @@ export class CreateEmployeeComponent implements OnInit {
       if (abstractControl instanceof FormGroup) {
         this.logValidationErrors(abstractControl);
       }
+
+      if (abstractControl instanceof FormArray) {
+        for (const control of abstractControl.controls) {
+          if (control instanceof FormGroup) {
+            this.logValidationErrors(control);
+          }
+        }
+      }
     });
   }
 
   onLoadDataClick(): void {
-    // this.logValidationErrors(this.employeeForm);
-    // console.log(this.formErrors);
+    const formArray = new FormArray([
+      new FormControl('John', Validators.required),
+      new FormGroup({
+        country: new FormControl('', Validators.required)
+      }),
+      new FormArray([])
+    ]);
+
+    const formArray1 = this.fb.array([
+      new FormControl('John', Validators.required),
+      new FormControl('IT', Validators.required),
+      new FormControl('Male', Validators.required)
+    ]);
+    formArray1.push(new FormControl('Mark', Validators.required));
+
+    console.log(formArray1.at(3).value);
   }
 
   onSubmit(): void {
