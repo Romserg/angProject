@@ -1,0 +1,47 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "fullName": "Mark",
+      "contactPreference": "email",
+      "email": "mark@email.com",
+      "phone": "1234567890",
+      "skills": [
+        {
+          "skillName": "JS",
+          "experienceInYears": 3,
+          "proficiency": "advanced"
+        },
+        {
+          "skillName": "Java",
+          "experienceInYears": 1,
+          "proficiency": "beginner"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "fullName": "John",
+      "contactPreference": "phone",
+      "email": "john@email.com",
+      "phone": "3234567892",
+      "skills": [
+        {
+          "skillName": "JS",
+          "experienceInYears": 2,
+          "proficiency": "intermediate"
+        },
+        {
+          "skillName": "Java",
+          "experienceInYears": 3,
+          "proficiency": "advanced"
+        },
+        {
+          "skillName": "HTML",
+          "experienceInYears": 3,
+          "proficiency": "advanced"
+        }
+      ]
+    }
+  ]
+}
