@@ -86,8 +86,14 @@
                        placeholder="C#, Java, Angular etc...">
                 <span class="help-block"
                       *ngIf="skill.get('skillName')['errors']?.required && skill.get('skillName').touched">
-                Skill Name is required.
-              </span>
+                  Skill Name is required.
+                </span>
+              </div>
+              <div class="col-sm-6" *ngIf="employeeForm.get('skills')['length']>1">
+                <button type="button" class="btn btn-danger pull-right"
+                        title="Delete Skill" (click)="removeSkillButtonClick(i)">
+                  <span class="glyphicon glyphicon-remove"></span>
+                </button>
               </div>
             </div>
 
@@ -121,8 +127,8 @@
                 </label>
                 <span class="help-block"
                       *ngIf="skill.get('proficiency')['errors']?.required && skill.get('proficiency').touched">
-                Proficiency is required.
-              </span>
+                  Proficiency is required.
+                </span>
               </div>
             </div>
           </div>
