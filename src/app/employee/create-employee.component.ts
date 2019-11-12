@@ -14,6 +14,7 @@ import { ISkill } from './ISkill';
 export class CreateEmployeeComponent implements OnInit {
   employeeForm: FormGroup;
   employee: IEmployee;
+  pageTitle: string;
 
   validationMessages = {
     fullName: {
@@ -71,8 +72,10 @@ export class CreateEmployeeComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       const empId = +params.get('id');
       if (empId) {
+        this.pageTitle = 'Edit Employee';
         this.getEmployee(empId);
       } else {
+        this.pageTitle = 'Create Employee';
         this.employee = {
           id: null,
           fullName: '',
