@@ -10,7 +10,7 @@ const appRoutes: Routes = [
   {path: 'list', component: ListEmployeesComponent},
   {path: 'create', component: CreateEmployeeComponent},
   {path: 'edit/:id', component: CreateEmployeeComponent},
-  {path: '', redirectTo: '/home', pathMatch: 'full'},
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent}
 ];
 
